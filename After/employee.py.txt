@@ -1,0 +1,38 @@
+import json
+
+class CustomerOrder:
+    def __init__(self, order_id, customer_name, amount):
+        self.order_id = order_id
+        self.customer_name = customer_name
+        self.amount = amount
+
+class PaymentProcessor:
+    def process_payment(self, order: CustomerOrder):
+        print(f"Processing payment of ${order.amount} for {order.customer_name}")
+        return True  # Payment success
+
+class EmailNotifier:
+    def send_order_email(self, order: CustomerOrder):
+        print(f"Sending order confirmation email to {order.customer_name}")
+
+class OrderReportGenerator:
+    def generate_order_report(self, order: CustomerOrder):
+        order_data = {
+            "order_id": order.order_id,
+            "customer_name": order.customer_name,
+            "amount": order.amount
+        }
+        with open(f"order_{order.order_id}.json", "w") as file:
+            json.dump(order_data, file)
+        print(f"Order report for {order.order_id} saved!")
+
+# Usage
+order = CustomerOrder(101, "John Doe", 250)
+
+payment_processor = PaymentProcessor()
+email_notifier = EmailNotifier()
+report_generator = OrderReportGenerator()
+
+if payment_processor.process_payment(order):
+    email_notifier.send_order_email(order)
+    report_generator.generate_order_report(order)

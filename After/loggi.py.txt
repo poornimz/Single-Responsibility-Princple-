@@ -1,0 +1,26 @@
+import datetime
+
+class Logger:
+    @staticmethod
+    def log(message):
+        with open("log.txt", "a") as file:
+            file.write(f"{datetime.datetime.now()} - {message}\n")
+
+class UserAuth:
+    def __init__(self, username, password, logger):
+        self.username = username
+        self.password = password
+        self.logger = logger
+    
+    def login(self):
+        if self.username == "admin" and self.password == "password":
+            self.logger.log(f"User {self.username} logged in successfully.")
+            return True
+        else:
+            self.logger.log(f"User {self.username} failed to log in.")
+            return False
+
+# Usage
+logger = Logger()
+auth = UserAuth("admin", "password", logger)
+auth.login()

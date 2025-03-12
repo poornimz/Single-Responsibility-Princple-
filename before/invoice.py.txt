@@ -1,0 +1,14 @@
+class Invoice:
+    def __init__(self, customer, amount):
+        self.customer = customer
+        self.amount = amount
+
+    def generate_invoice(self):
+        return f"Invoice for {self.customer}: ${self.amount}"
+
+    def send_email(self):
+        print(f"Sending email to {self.customer} with invoice: {self.generate_invoice()}")
+
+# Usage
+invoice = Invoice("John Doe", 1000)
+invoice.send_email()
